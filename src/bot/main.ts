@@ -3,6 +3,7 @@ import env from "../utils/env";
 import handleStart from "./commands/handleStart";
 import handleMessage from "./commands/handleMessage";
 import handleError from "./errorHandler";
+import "./listener";
 
 const bot = new Bot(env.BOT_TOKEN);
 
