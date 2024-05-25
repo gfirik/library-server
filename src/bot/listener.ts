@@ -1,5 +1,6 @@
 import { supabase } from "../supabase/supabase";
 import bot from "./main";
+import { sendMessageToUsers } from "./sendMessageToUsers";
 
 interface Book {
   title: string;
@@ -15,13 +16,21 @@ interface Payload {
 const handleNewBookInsert = async (payload: Payload) => {
   const newBook = payload.new;
 
-  const message = ` 
-    A new book has been added to the library!
-    Title: ${newBook.title}
-    Author: ${newBook.author}
-    Description: ${newBook.description}
-    Published Year: ${newBook.published}
-  `;
+  const escapeHtml = (text: string) =>
+    text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  const message = `<b>A new book has been added to the library!</b>\n\nTitle: <i>${escapeHtml(
+    newBook.title
+  )}</i>\nAuthor: <i>${escapeHtml(
+    newBook.author
+  )}</i>\nDescription: ${escapeHtml(newBook.description)}\nPublished Year: ${
+    newBook.published
+  }`;
 
   const { data: users, error } = await supabase
     .from("users")
@@ -32,16 +41,7 @@ const handleNewBookInsert = async (payload: Payload) => {
     return;
   }
 
-  for (const user of users) {
-    try {
-      await bot.api.sendMessage(user.telegram_user_id, message);
-    } catch (error) {
-      console.error(
-        `Error sending message to user ${user.telegram_user_id}`,
-        error
-      );
-    }
-  }
+  await sendMessageToUsers(bot, users, message);
 };
 
 supabase
