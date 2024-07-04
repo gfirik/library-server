@@ -5,7 +5,9 @@
   "scripts": {
     "start": "bun src/index.ts",
     "clean": "rm -rf dist && echo 'Done.'",
-    "dev": "bun --watch src/index.ts"
+    "dev": "bun --watch src/index.ts",
+    "build": "bun build src/index.ts --outfile=dist/index.js --target=bun",
+    "postbuild": "cp package.json dist/ && cp Procfile dist/"
   },
   "devDependencies": {
     "@types/bun": "latest"
