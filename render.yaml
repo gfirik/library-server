@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: your-app-name
-    env: docker
-    buildCommand: bun install && bun run build
-    startCommand: bun run start
-    envVars:
-      - key: NODE_VERSION
-        value: 18

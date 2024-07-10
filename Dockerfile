@@ -1,14 +1,12 @@
-FROM oven/bun:latest
+FROM oven/bun:1
 
 WORKDIR /app
 
 COPY package.json .
 COPY bun.lockb .
 
-RUN bun install
+RUN bun install --production
 
-COPY . .
-
-RUN bun run build
+COPY dist ./dist
 
 CMD ["bun", "run", "start"]
