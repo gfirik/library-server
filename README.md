@@ -60,8 +60,8 @@ Ensure you have the following environment variables set in a `.env` file in the 
 
 ```.env
 BOT_TOKEN=your_telegram_api_key
-SUPABASE_PROJECT_URLSUPABASE_U=your_supabase_url
-SUPABASE_PUBLIC_ANON_KEYSUPABASE_ANON_K=your_supabase_anon_key
+SUPABASE_PROJECT_URL=your_supabase_url
+SUPABASE_PUBLIC_ANON_KEY=your_supabase_anon_key
 ```
 
 Replace `your_telegram_api_key`, `your_supabase_url`, and `your_supabase_anon_key` with your actual API keys and URL
