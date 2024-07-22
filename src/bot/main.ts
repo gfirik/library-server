@@ -4,7 +4,8 @@ import handleStart from "./commands/handleStart";
 import handleMessage from "./commands/handleMessage";
 import handleError from "./errorHandler";
 import { handleChatMemberUpdates } from "./commands/handleChatMemberUpdate";
-import "./listener";
+import "./listeners/book.listener";
+import "./listeners/order.listener";
 
 const bot = new Bot(env.BOT_TOKEN);
 
