@@ -1,7 +1,6 @@
 import { escapeHtml } from "../../services/escapeHTML";
 import { supabase } from "../../supabase/supabase";
 import bot from "../main";
-import { sendMessageToUsers } from "../sendMessageToUsers";
 
 interface Order {
   user_id: string;
@@ -18,8 +17,6 @@ interface OrderPayload {
 }
 
 const handleNewOrderInsert = async (payload: OrderPayload) => {
-  console.log("New order received:", payload.new);
-
   const newOrder = payload.new;
 
   try {
@@ -34,30 +31,39 @@ const handleNewOrderInsert = async (payload: OrderPayload) => {
       throw new Error(`Error fetching book data: ${bookError.message}`);
     }
 
-    const message = `<b>A new order has been placed!</b>\n\n
-      Book: <i>${escapeHtml(bookData.title)}</i>
-      Start Date: ${new Date(newOrder.start_date).toLocaleDateString()}
-      End Date: ${new Date(newOrder.end_date).toLocaleDateString()}
-      Total Price: $${newOrder.total_price.toFixed(2)}
-      Status: ${newOrder.status}
+    // Fetch user's Telegram ID
+    const { data: userData, error: userError } = await supabase
+      .from("users")
+      .select("telegram_user_id")
+      .eq("id", newOrder.user_id)
+      .single();
 
-      New order received!`;
+    if (userError) {
+      throw new Error(`Error fetching user data: ${userError.message}`);
+    }
+
+    const message = `<b>Buyurtmangiz</b>\n\n
+      Kitob: <i>${escapeHtml(bookData.title)}</i>\n
+      Boshlanish: ${new Date(newOrder.start_date).toLocaleDateString()}\n
+      Yakuniy sana: ${new Date(newOrder.end_date).toLocaleDateString()}\n
+      Umumiy narx: ${newOrder.total_price.toFixed(2)}KRW\n
+      Buyurtma holati: ${newOrder.status}\n\n
+      
+      Ijara buyurtmangizni tasdiqlash uchun quyidagi hisob raqamiga umumiy ko'rsatilgan narxni jo'nating.\n
+      Hisob egasi: <b>GAFURJONOV FIRDAVS</b>\n
+      Hisob raqam: <b>74891134496607</b>\n
+      Bank: <b>KEB Hana Bank</b>\n
+      
+      Jo'natmangizning screenshot'ini esa shu xabarga javob (reply) qilib yuboring:\n\n
+      Buyurtmangiz uchun tashakkur!`;
 
     console.log("Prepared message:", message);
 
-    // Fetch all users
-    const { data: users, error: userError } = await supabase
-      .from("users")
-      .select("telegram_user_id");
-
-    if (userError) {
-      throw new Error(`Error fetching users: ${userError.message}`);
-    }
-
-    console.log("Fetched users:", users);
-
-    await sendMessageToUsers(bot, [{ telegram_user_id: 433734174 }], message);
-    console.log("Messages sent successfully");
+    // Send message to the specific user
+    await bot.api.sendMessage(userData.telegram_user_id, message, {
+      parse_mode: "HTML",
+    });
+    console.log("Confirmation message sent successfully");
   } catch (error) {
     console.error("Error in handleNewOrderInsert:", error);
   }
@@ -86,7 +92,5 @@ function setupRealtimeListener() {
 }
 
 let channel = setupRealtimeListener();
-
-console.log("Order listener setup complete");
 
 export default channel;
