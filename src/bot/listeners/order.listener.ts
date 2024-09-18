@@ -1,5 +1,6 @@
 import { escapeHtml } from "../../services/escapeHTML";
 import { supabase } from "../../supabase/supabase";
+import env from "../../utils/env";
 import bot from "../main";
 
 interface Order {
@@ -15,6 +16,8 @@ interface Order {
 interface OrderPayload {
   new: Order;
 }
+
+const adminTelegramId = env.ADMIN_TELEGRAM_ID;
 
 const handleNewOrderInsert = async (payload: OrderPayload) => {
   const newOrder = payload.new;
@@ -50,11 +53,11 @@ const handleNewOrderInsert = async (payload: OrderPayload) => {
       Buyurtma holati: ${newOrder.status}\n\n
       
       Ijara buyurtmangizni tasdiqlash uchun quyidagi hisob raqamiga umumiy ko'rsatilgan narxni jo'nating.\n
-      Hisob egasi: <b>GAFURJONOV FIRDAVS</b>\n
+      Hisob egasi: <b>GAFURJONOV</b>\n
       Hisob raqam: <b>74891134496607</b>\n
       Bank: <b>KEB Hana Bank</b>\n
       
-      Jo'natmangizning screenshot'ini esa shu xabarga javob (reply) qilib yuboring:\n\n
+      To'lovni amalga oshirgandan so'ng bemalol ijaraga olayotgan kitobingizni olib ketish uchun belgilagan sanangizdan boshlab tashrif buyurishingiz mumkin.\n\n
       Buyurtmangiz uchun tashakkur!`;
 
     console.log("Prepared message:", message);
@@ -64,6 +67,25 @@ const handleNewOrderInsert = async (payload: OrderPayload) => {
       parse_mode: "HTML",
     });
     console.log("Confirmation message sent successfully");
+
+    const adminMessage = `<b>Yangi buyurtma qabul qilindi!</b>\n\n
+      Foydalanuvchi ID: ${newOrder.user_id}\n
+      Foydalanuvchi Telegram ID: ${userData.telegram_user_id}\n
+      Kitob: <i>${escapeHtml(bookData.title)}</i>\n
+      Boshlanish: ${new Date(newOrder.start_date).toLocaleDateString()}\n
+      Yakuniy sana: ${new Date(newOrder.end_date).toLocaleDateString()}\n
+      Umumiy narx: ${newOrder.total_price.toFixed(2)}KRW\n
+      Buyurtma holati: ${newOrder.status}\n
+      To'lov skrinshotini yuborish: ${
+        newOrder.payment_screenshot ? "Ha" : "Yo'q"
+      }`;
+
+    if (adminTelegramId) {
+      await bot.api.sendMessage(adminTelegramId, adminMessage, {
+        parse_mode: "HTML",
+      });
+      console.log("Admin notification sent successfully");
+    }
   } catch (error) {
     console.error("Error in handleNewOrderInsert:", error);
   }
