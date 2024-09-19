@@ -11,6 +11,7 @@ export const UserSchema = z.object({
   username: z.string().nullable(),
   books_read: z.array(BookSchema).default([]),
   books_reading: z.array(BookSchema).max(2).default([]),
+  firstname: z.string().nullable(),
 });
 
 export type User = z.infer<typeof UserSchema>;

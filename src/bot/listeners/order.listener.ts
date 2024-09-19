@@ -45,20 +45,17 @@ const handleNewOrderInsert = async (payload: OrderPayload) => {
       throw new Error(`Error fetching user data: ${userError.message}`);
     }
 
-    const message = `<b>Buyurtmangiz</b>\n\n
-      Kitob: <i>${escapeHtml(bookData.title)}</i>\n
-      Boshlanish: ${new Date(newOrder.start_date).toLocaleDateString()}\n
-      Yakuniy sana: ${new Date(newOrder.end_date).toLocaleDateString()}\n
-      Umumiy narx: ${newOrder.total_price.toFixed(2)}KRW\n
-      Buyurtma holati: ${newOrder.status}\n\n
-      
-      Ijara buyurtmangizni tasdiqlash uchun quyidagi hisob raqamiga umumiy ko'rsatilgan narxni jo'nating.\n
-      Hisob egasi: <b>GAFURJONOV</b>\n
-      Hisob raqam: <b>74891134496607</b>\n
-      Bank: <b>KEB Hana Bank</b>\n
-      
-      To'lovni amalga oshirgandan so'ng bemalol ijaraga olayotgan kitobingizni olib ketish uchun belgilagan sanangizdan boshlab tashrif buyurishingiz mumkin.\n\n
-      Buyurtmangiz uchun tashakkur!`;
+    const message = `<b>Buyurtmangiz</b>\n\nKitob: <i>${escapeHtml(
+      bookData.title
+    )}</i>\nBoshlanish: ${new Date(
+      newOrder.start_date
+    ).toLocaleDateString()}\nYakuniy sana: ${new Date(
+      newOrder.end_date
+    ).toLocaleDateString()}\nUmumiy narx: ${newOrder.total_price.toFixed(
+      2
+    )}KRW\nBuyurtma holati: ${
+      newOrder.status
+    }\n\nIjara buyurtmangizni tasdiqlash uchun quyidagi hisob raqamiga umumiy ko'rsatilgan narxni jo'nating.\nHisob egasi: <b>GAFURJONOV</b>\nHisob raqam: <b>111222333444555666</b>\nBank: <b>KEB Hana Bank</b>\n\nTo'lovni amalga oshirgandan so'ng bemalol ijaraga olayotgan kitobingizni olib ketish uchun belgilagan sanangizdan boshlab tashrif buyurishingiz mumkin.\n\nBuyurtmangiz uchun tashakkur!`;
 
     console.log("Prepared message:", message);
 
@@ -68,17 +65,15 @@ const handleNewOrderInsert = async (payload: OrderPayload) => {
     });
     console.log("Confirmation message sent successfully");
 
-    const adminMessage = `<b>Yangi buyurtma qabul qilindi!</b>\n\n
-      Foydalanuvchi ID: ${newOrder.user_id}\n
-      Foydalanuvchi Telegram ID: ${userData.telegram_user_id}\n
-      Kitob: <i>${escapeHtml(bookData.title)}</i>\n
-      Boshlanish: ${new Date(newOrder.start_date).toLocaleDateString()}\n
-      Yakuniy sana: ${new Date(newOrder.end_date).toLocaleDateString()}\n
-      Umumiy narx: ${newOrder.total_price.toFixed(2)}KRW\n
-      Buyurtma holati: ${newOrder.status}\n
-      To'lov skrinshotini yuborish: ${
-        newOrder.payment_screenshot ? "Ha" : "Yo'q"
-      }`;
+    const adminMessage = `<b>Yangi buyurtma qabul qilindi!</b>\n\nFoydalanuvchi Telegram ID: ${
+      userData.telegram_user_id
+    }\nKitob: <i>${escapeHtml(bookData.title)}</i>\nBoshlanish: ${new Date(
+      newOrder.start_date
+    ).toLocaleDateString()}\nYakuniy sana: ${new Date(
+      newOrder.end_date
+    ).toLocaleDateString()}\nUmumiy narx: ${newOrder.total_price.toFixed(
+      2
+    )}KRW\nBuyurtma holati: ${newOrder.status}`;
 
     if (adminTelegramId) {
       await bot.api.sendMessage(adminTelegramId, adminMessage, {

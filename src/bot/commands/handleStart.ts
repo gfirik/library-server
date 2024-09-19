@@ -1,6 +1,10 @@
 import { UserSchema } from "../../types/schemas";
 import { supabase } from "../../supabase/supabase";
 import { Context } from "grammy";
+import env from "../../utils/env";
+import bot from "../main";
+
+const adminTelegramId = env.ADMIN_TELEGRAM_ID;
 
 const handleStart = async (ctx: Context) => {
   const { from } = ctx;
@@ -13,6 +17,7 @@ const handleStart = async (ctx: Context) => {
   const userData = UserSchema.parse({
     telegram_user_id: from?.id,
     username: from?.username,
+    firstname: from?.first_name,
   });
 
   const { data: existingUser, error: fetchError } = await supabase
@@ -37,6 +42,18 @@ const handleStart = async (ctx: Context) => {
       await ctx.reply(
         `Welcome ${from?.first_name}! \n\nStart the web app from menu button to use our library!.`
       );
+
+      if (adminTelegramId) {
+        const adminMessage = `<b>Yangi foydalanuvchi!</b>\n\nFoydalanuvchi nomi: ${
+          from?.first_name
+        }\nFoydalanuvchi username: ${
+          from?.username || "no username"
+        }\nFoydalanuvchi ID: ${from?.id}\n`;
+        await bot.api.sendMessage(adminTelegramId, adminMessage, {
+          parse_mode: "HTML",
+        });
+        console.log("Admin notified about new user registration");
+      }
     }
   }
 
