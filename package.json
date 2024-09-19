@@ -3,10 +3,10 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "bun src/index.ts",
+    "start": "bun api/bot/index.ts",
     "clean": "rm -rf dist && echo 'Done.'",
-    "dev": "bun --watch src/index.ts",
-    "build": "bun build src/index.ts --outfile=dist/index.js --target=bun",
+    "dev": "bun --watch api/bot/index.ts",
+    "build": "bun build api/bot/index.ts --outfile=dist/index.js --target=bun",
     "postbuild": "cp package.json dist/"
   },
   "devDependencies": {

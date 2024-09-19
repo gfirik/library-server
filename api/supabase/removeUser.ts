@@ -1,4 +1,4 @@
-import { supabase } from "../supabase/supabase";
+import { supabase } from "./supabase";
 
 export const removeUserFromDatabase = async (userId: number) => {
   console.log(

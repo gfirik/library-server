@@ -1,7 +1,7 @@
 import { escapeHtml } from "../../services/escapeHTML";
 import { supabase } from "../../supabase/supabase";
 import bot from "../main";
-import { sendMessageToUsers } from "../sendMessageToUsers";
+import { sendMessageToUsers } from "../../services/sendMessageToUsers";
 
 interface Book {
   title: string;
