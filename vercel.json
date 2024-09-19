@@ -3,7 +3,7 @@
   "builds": [
     {
       "src": "api/bot.ts",
-      "use": "@vercel/bun"
+      "use": "@vercel/node"
     }
   ],
   "routes": [

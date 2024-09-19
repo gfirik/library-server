@@ -3,15 +3,12 @@
   "type": "module",
   "scripts": {
     "start": "bun api/bot.ts",
-    "clean": "rm -rf dist && echo 'Done.'",
     "dev": "bun --watch api/bot.ts",
     "build": "bun build api/bot.ts --outfile=dist/index.js --target=bun",
-    "postbuild": "cp package.json dist/",
     "vercel-build": "echo 'Build step not required for Bun on Vercel'"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "typescript": "^5.0.0"
+    "@types/bun": "latest"
   },
   "dependencies": {
     "@grammyjs/runner": "^2.0.3",
