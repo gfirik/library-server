@@ -1,6 +1,6 @@
 import { webhookCallback } from "grammy";
 import { serve } from "bun";
-import bot from "./main";
+import bot from "../src/bot/main";
 
 const handleUpdate = webhookCallback(bot, "http");
 
