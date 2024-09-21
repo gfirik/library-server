@@ -1,7 +1,7 @@
 import { Context } from "grammy";
-import { removeUserFromDatabase } from "../../supabase/removeUser";
-import env from "../../utils/env";
-import bot from "../main";
+import { removeUserFromDatabase } from "../../supabase/removeUser.js";
+import env from "../../utils/env.js";
+import bot from "../main.js";
 
 const adminTelegramId = env.ADMIN_TELEGRAM_ID;
 

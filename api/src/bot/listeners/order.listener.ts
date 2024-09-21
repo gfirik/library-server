@@ -1,7 +1,7 @@
-import { escapeHtml } from "../../services/escapeHTML";
-import { supabase } from "../../supabase/supabase";
-import env from "../../utils/env";
-import bot from "../main";
+import { escapeHtml } from "../../services/escapeHTML.js";
+import { supabase } from "../../supabase/supabase.js";
+import env from "../../utils/env.js";
+import bot from "../main.js";
 
 interface Order {
   user_id: string;
