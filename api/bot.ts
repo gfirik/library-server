@@ -1,12 +1,7 @@
 import { webhookCallback } from "grammy";
 import bot from "../src/bot/main";
 
-// Webhook handler
 const handler = webhookCallback(bot, "std/http");
-
-export const config = {
-  runtime: "nodejs",
-};
 
 export default async function (req: Request) {
   if (req.method === "POST") {
