@@ -1,5 +1,5 @@
 import { webhookCallback } from "grammy";
-import bot from "./src/bot/main";
+import bot from "./src/bot/main.js";
 
 const handler = webhookCallback(bot, "std/http");
 
