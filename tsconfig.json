@@ -11,12 +11,12 @@
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "allowJs": true,
-    "outDir": "dist",
+    "outDir": "./dist",
     "noEmit": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "include": ["api/**/*", "src/**/*"],
+  "include": ["api/**/*", "api/src/**/*"],
   "exclude": ["node_modules"]
 }
