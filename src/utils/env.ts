@@ -1,4 +1,6 @@
+import dotenv from "dotenv";
 import { z } from "zod";
+dotenv.config();
 
 const envSchema = z.object({
   BOT_TOKEN: z.string().min(1),

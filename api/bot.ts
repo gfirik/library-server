@@ -1,12 +1,22 @@
 import { webhookCallback } from "grammy";
-import { serve } from "bun";
 import bot from "../src/bot/main";
 
-const handleUpdate = webhookCallback(bot, "std/http");
+// Webhook handler
+const handler = webhookCallback(bot, "std/http");
 
-serve({
-  port: 6666,
-  fetch(req) {
-    return handleUpdate(req);
-  },
-});
+export const config = {
+  runtime: "nodejs",
+};
+
+export default async function (req: Request) {
+  if (req.method === "POST") {
+    try {
+      await handler(req);
+      return new Response("OK", { status: 200 });
+    } catch (error) {
+      return new Response("Error handling the webhook", { status: 500 });
+    }
+  }
+
+  return new Response("Method not allowed", { status: 405 });
+}

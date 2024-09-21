@@ -2,18 +2,22 @@
   "name": "library-server",
   "type": "module",
   "scripts": {
-    "start": "bun api/bot.ts",
-    "dev": "bun --watch api/bot.ts",
-    "build": "bun build api/bot.ts --outfile=dist/index.js --target=bun",
-    "vercel-build": "echo 'Build step not required for Bun on Vercel'"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
+    "start": "pnpm tsx watch api/bot.ts",
+    "dev": "pnpm tsx watch api/bot.ts",
+    "build": "tsc",
+    "vercel-build": "tsc"
   },
   "dependencies": {
-    "@grammyjs/runner": "^2.0.3",
     "@supabase/supabase-js": "^2.43.0",
+    "dotenv": "^16.4.5",
     "grammy": "^1.22.4",
+    "tsx": "^3.12.7",
+    "typescript": "^5.2.0",
     "zod": "^3.23.4"
-  }
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "nodemon": "^3.0.1"
+  },
+  "packageManager": "pnpm@9.2.0+sha512.98a80fd11c2e7096747762304106432b3ddc67dcf54b5a8c01c93f68a2cd5e05e6821849522a06fb76284d41a2660d5e334f2ee3bbf29183bf2e739b1dafa771"
 }
