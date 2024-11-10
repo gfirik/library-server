@@ -17,6 +17,6 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "include": ["api/**/*", "api/src/**/*"],
+  "include": ["api/**/*"],
   "exclude": ["node_modules"]
 }
