@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: bun-app
+    name: lib-server
     env: node
     buildCommand: "bun install"
     startCommand: "bun run start"
