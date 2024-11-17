@@ -1,0 +1,24 @@
+{
+  "name": "lib-server",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun src/index.ts",
+    "build": "bun install",
+    "dev": "bun --hot src/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "dependencies": {
+    "@grammyjs/runner": "^2.0.3",
+    "@supabase/supabase-js": "^2.43.0",
+    "dotenv": "^16.4.5",
+    "grammy": "^1.22.4",
+    "telegraf-middleware-console-time": "^2.1.0",
+    "zod": "^3.23.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
