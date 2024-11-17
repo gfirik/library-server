@@ -2,6 +2,6 @@ services:
   - type: web
     name: bun-app
     env: node
-    buildCommand: "bun install && bun run build"
+    buildCommand: "bun install"
     startCommand: "bun run start"
     plan: free
