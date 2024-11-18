@@ -1,5 +1,5 @@
 import { Context, GrammyError, HttpError } from "grammy";
-import { removeUserFromDatabase } from "../supabase/removeUser.ts";
+import { removeUserFromDatabase } from "../supabase/removeUser.js";
 
 interface ErrorContext {
   ctx: Context;

@@ -1,8 +1,8 @@
-import { UserSchema } from "../../types/schemas.ts";
-import { supabase } from "../../supabase/supabase.ts";
+import { UserSchema } from "../../types/schemas.js";
+import { supabase } from "../../supabase/supabase.js";
 import { Context } from "grammy";
-import env from "../../utils/env.ts";
-import bot from "../main.ts";
+import env from "../../utils/env.js";
+import bot from "../main.js";
 
 const adminTelegramId = env.ADMIN_TELEGRAM_ID;
 

@@ -1,7 +1,7 @@
 import { webhookCallback } from "grammy";
 import { run } from "@grammyjs/runner";
-import bot from "../src/bot/main";
-import env from "../src/utils/env";
+import bot from "../src/bot/main.js";
+import env from "../src/utils/env.js";
 
 if (env.NODE_ENV === "production") {
   const handler = webhookCallback(bot, "bun");

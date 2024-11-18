@@ -1,12 +1,12 @@
 import { Bot } from "grammy";
 import { generateUpdateMiddleware } from "telegraf-middleware-console-time";
-import env from "../utils/env.ts";
-import handleStart from "./commands/handleStart";
-import handleMessage from "./commands/handleMessage.ts";
-import handleError from "./errorHandler.ts";
-import { handleChatMemberUpdates } from "./commands/handleChatMemberUpdate.ts";
-import "./listeners/book.listener.ts";
-import "./listeners/order.listener.ts";
+import env from "../utils/env.js";
+import handleStart from "./commands/handleStart.js";
+import handleMessage from "./commands/handleMessage.js";
+import handleError from "./errorHandler.js";
+import { handleChatMemberUpdates } from "./commands/handleChatMemberUpdate.js";
+import "./listeners/book.listener.js";
+import "./listeners/order.listener.js";
 
 const bot = new Bot(env.BOT_TOKEN);
 
