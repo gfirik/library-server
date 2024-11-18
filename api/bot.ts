@@ -4,7 +4,7 @@ import bot from "../src/bot/main.js";
 import env from "../src/utils/env.js";
 
 if (env.NODE_ENV === "production") {
-  const handler = webhookCallback(bot, "bun");
+  const handler = webhookCallback(bot, "std/http");
 
   Bun.serve({
     async fetch(req) {
