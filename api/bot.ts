@@ -1,19 +1,25 @@
 import { webhookCallback } from "grammy";
 import { run } from "@grammyjs/runner";
-import bot from "../src/bot/main.ts";
-import env from "../src/utils/env.ts";
+import bot from "../src/bot/main";
+import env from "../src/utils/env";
 
-const handler = webhookCallback(bot, "https");
+if (env.NODE_ENV === "production") {
+  const handler = webhookCallback(bot, "bun");
 
-export default async function (req: any, res: any) {
-  if (req.method === "POST") {
-    return await handler(req, res);
-  } else {
-    res.status(405).send("Method Not Allowed");
-  }
-}
+  Bun.serve({
+    async fetch(req) {
+      if (req.method === "POST") {
+        return await handler(req);
+      } else {
+        return new Response("Method Not Allowed", { status: 405 });
+      }
+    },
+    port: 3333,
+    development: false,
+  });
 
-if (env.NODE_ENV !== "production") {
+  console.log("Webhook server running on port 3333");
+} else {
   run(bot);
   console.log("Bot started locally. For testing, ensure to connect via ngrok.");
 }
