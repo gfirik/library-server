@@ -6,6 +6,5 @@
     }
   },
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "bun install",
-  "buildCommand": "bun build"
+  "installCommand": "bun install"
 }
