@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: lib-server
-    env: node
-    buildCommand: "bun install"
-    startCommand: "bun run start"
-    plan: free
