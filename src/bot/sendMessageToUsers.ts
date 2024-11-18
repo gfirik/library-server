@@ -1,5 +1,5 @@
 import { Bot, GrammyError } from "grammy";
-import { removeUserFromDatabase } from "../supabase/removeUser";
+import { removeUserFromDatabase } from "../supabase/removeUser.ts";
 
 export const sendMessageToUsers = async (
   bot: Bot,

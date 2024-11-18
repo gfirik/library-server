@@ -1,7 +1,7 @@
-import { escapeHtml } from "../../services/escapeHTML";
-import { supabase } from "../../supabase/supabase";
-import bot from "../main";
-import { sendMessageToUsers } from "../sendMessageToUsers";
+import { escapeHtml } from "../../services/escapeHTML.ts";
+import { supabase } from "../../supabase/supabase.ts";
+import bot from "../main.ts";
+import { sendMessageToUsers } from "../sendMessageToUsers.ts";
 
 interface Book {
   title: string;
@@ -76,10 +76,9 @@ supabase
     handleBookStatusUpdate
   )
   .subscribe((status) => {
+    console.log("Book Subcscription status:", status);
 
-      console.log("Book Subcscription status:", status)
-  
-  
-  if (status === "SUBSCRIBED") {
+    if (status === "SUBSCRIBED") {
       console.log("Successfully subscribed to books");
-    }});
+    }
+  });
