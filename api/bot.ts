@@ -3,7 +3,9 @@ import { run } from "@grammyjs/runner";
 import bot from "./src/bot/main.js";
 import env from "./src/utils/env.js";
 
-export default webhookCallback(bot, "std/http");
+const handler = webhookCallback(bot, "std/http");
+export default handler;
+
 console.log("Webhook server running...");
 
 if (env.NODE_ENV === "development") {
