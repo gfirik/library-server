@@ -1,15 +1,31 @@
-# lib-server
+# Library Server
 
-To install dependencies:
+A lightweight Telegram bot server built with `bun.js` and `grammy`.
 
-```bash
-bun install
-```
+## Docker Deployment
 
-To run:
+### Prerequisites
 
-```bash
-bun run index.ts
-```
+- Docker and Docker Compose installed on your machine.
 
-This project was created using `bun init` in bun v1.1.34. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+### Commands
+
+1. **Build the Docker image**:
+   ```bash
+   docker compose build
+   ```
+2. **Start the application**:
+   ```bash
+   docker compose up -d
+   ```
+3. **View logs**:
+   ```bash
+   docker compose logs -f
+   ```
+4. **Stop the application**:
+   ```bash
+   docker compose down
+   ```
+
+License
+This project is licensed under the MIT License. See LICENSE for details.
