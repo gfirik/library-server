@@ -1,6 +1,5 @@
 # Ignore node_modules and bun's install cache
 node_modules
-bun.lockb
 
 # Logs
 *.log
